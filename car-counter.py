@@ -10,7 +10,21 @@ def white():
     print("\033[0m")
 
 def removeLastLine():
-    print("\e[F")
+    print("\033[A\033[G\033[2K", end='')
+
+def sortByMostVotes(carObjList):
+    sortedObjList = []
+    maxVotesRemaining = 0
+    maxVotesRemainingIndex = 0
+    while len(carObjList) > 0:
+        for k in range(len(carObjList)):
+            if carObjList[k].votes > maxVotesRemaining:
+                maxVotesRemainingIndex = k
+        sortedObjList.append(carObjList[k])
+        carObjList.pop(k)
+    return sortedObjList
+
+
 
 def main():   # The Main Function: Where the program is mainly operated
     green()
@@ -32,11 +46,16 @@ def main():   # The Main Function: Where the program is mainly operated
             break
 
         # check Bounds of the number entered
-        if nextNumber < 0 or nextNumber > totalCars:
-            removeLastLine();
-            
+        while int(nextNumber) < 1 or int(nextNumber) > totalCars:
+            nextNumber = input("Car Number Not in Bounds, Enter Again (Type Results for Results): ")
+        removeLastLine()
 
-    
+        # code to increase vote number
+        carObj = carObjList[int(nextNumber) - 1]
+        carObj.votes += 1
+
+    sortedCars = sortByMostVotes(carObjList)
+
     white()
     exit(0)
 
