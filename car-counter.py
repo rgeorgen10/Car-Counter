@@ -33,11 +33,11 @@ def printResults(sortedCars):
     print("|----------------------------|\n")
     for i in range(len(sortedCars)):
         if sortedCars[i].num >= 100:
-            print(f"Car Number: {sortedCars[i].num} | Votes: {sortedCars[i].votes}")
+            print(f"Car Number: {sortedCars[i].num} | Votes: {sortedCars[i].votes} | Rank:  {i + 1}")
         elif sortedCars[i].num >= 10:
-            print(f"Car Number: {sortedCars[i].num}  | Votes: {sortedCars[i].votes}")
+            print(f"Car Number: {sortedCars[i].num}  | Votes: {sortedCars[i].votes} | Rank: {i + 1}")
         else:
-            print(f"Car Number: {sortedCars[i].num}   | Votes: {sortedCars[i].votes}")
+            print(f"Car Number: {sortedCars[i].num}   | Votes: {sortedCars[i].votes} | Rank: {i + 1}")
 
 def main():   # The Main Function: Where the program is mainly operated
     green()
