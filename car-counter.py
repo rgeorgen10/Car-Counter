@@ -57,12 +57,12 @@ def main():   # The Main Function: Where the program is mainly operated
         nextNumber = input("Type the number of the next car voted on (Type Results for Final Results): ")  # Prompt for next car number
         if nextNumber == "Results":
             break
-
         # check Bounds of the number entered
-        while nextNumber == "" or int(nextNumber) < 1 or int(nextNumber) > totalCars:
+        while nextNumber == "" or not nextNumber.isdigit() or int(nextNumber) < 1 or int(nextNumber) > totalCars:
             nextNumber = input("Car Number Not in Bounds, Enter Again (Type Results for Results): ")
         removeLastLine()
-
+        if nextNumber == "Results": # put this after the bounds check to avoid errors if the user types "Results" when prompted for a car number
+            break
         # code to increase vote number
         carObj = carObjList[int(nextNumber) - 1]
         carObj.votes += 1
