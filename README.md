@@ -5,19 +5,17 @@
 ## Usage
 
 ```bash
-python car-counter.py --input <input_file> --output <output_file>
+python car-counter.py
 ```
 
 ## Features
 
-- Detects and counts cars
-- Processes video or image input
+- Counts the number of votes by just asking the user to enter the number of the car
 - Writes results to an output file
 
 ## Requirements
 
 - Python 3
-- OpenCV
 
 ## License
 
