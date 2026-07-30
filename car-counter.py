@@ -4,7 +4,7 @@ class Car: # Car class: stores the car number and the number of votes
         self.votes = votes
 
 def green():
-    print("\033[32m")
+    print("\033[92m")
 
 def white():
     print("\033[0m")
@@ -27,17 +27,30 @@ def sortByMostVotes(carObjList):
         maxVotesRemainingIndex = 0
     return sortedObjList
 
-def printResults(sortedCars):
+def printResults(sortedCars, takeTop):
     print("\n|----------------------------|")
     print("|        Final Results       |")
     print("|----------------------------|\n")
-    for i in range(len(sortedCars)):
+    for i in range(takeTop):
         if sortedCars[i].num >= 100:
-            print(f"Car Number: {sortedCars[i].num} | Votes: {sortedCars[i].votes} | Rank:  {i + 1}")
+            print(f"Car Number: {sortedCars[i].num} | Votes: {sortedCars[i].votes} | Rank: {i + 1}")
         elif sortedCars[i].num >= 10:
             print(f"Car Number: {sortedCars[i].num}  | Votes: {sortedCars[i].votes} | Rank: {i + 1}")
         else:
             print(f"Car Number: {sortedCars[i].num}   | Votes: {sortedCars[i].votes} | Rank: {i + 1}")
+
+def exportResults(sortedCars):
+    with open("results.txt", "w") as f:
+        f.write("|----------------------------|\n")
+        f.write("|        Final Results       |\n")
+        f.write("|----------------------------|\n\n")
+        for i in range(len(sortedCars)):
+            if sortedCars[i].num >= 100:
+                f.write(f"Car Number: {sortedCars[i].num} | Votes: {sortedCars[i].votes} | Rank: {i + 1}\n")
+            elif sortedCars[i].num >= 10:
+                f.write(f"Car Number: {sortedCars[i].num}  | Votes: {sortedCars[i].votes} | Rank: {i + 1}\n")
+            else:
+                f.write(f"Car Number: {sortedCars[i].num}   | Votes: {sortedCars[i].votes} | Rank: {i + 1}\n")
 
 def main():   # The Main Function: Where the program is mainly operated
     green()
@@ -80,7 +93,27 @@ def main():   # The Main Function: Where the program is mainly operated
 
 
     sortedCars = sortByMostVotes(carObjList)
-    printResults(sortedCars)
+    takeTop = -1
+    while takeTop < 1 or takeTop > totalCars:
+        takeTop = int(input(f"How many of the top cars would you like to see? (1-{totalCars}): "))
+        if takeTop < 1 or takeTop > totalCars:
+            removeLastLine()
+            print(f"Invalid Number, Please Enter a number between 1 and {totalCars}")
+            removeLastLine()
+    printResults(sortedCars, takeTop)
+
+    while True:
+        export = input("Would you like to export the results to a text file? (Y/N): ")
+        if export == "Y" or export == "y":
+            exportResults(sortedCars)
+            print("Results exported to results.txt")
+            break
+        elif export == "N" or export == "n":
+            break
+        else:
+            removeLastLine()
+            print("Invalid Input, Please Enter Y or N")
+            removeLastLine()
 
     white()
     exit(0)
