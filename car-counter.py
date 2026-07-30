@@ -56,16 +56,27 @@ def main():   # The Main Function: Where the program is mainly operated
     while contToResults == False:  # While the user hasn't requested final results, continue prompting for voting numbers
         nextNumber = input("Type the number of the next car voted on (Type Results for Final Results): ")  # Prompt for next car number
         if nextNumber == "Results":
+            contToResults = True
             break
         # check Bounds of the number entered
-        while nextNumber == "" or not nextNumber.isdigit() or int(nextNumber) < 1 or int(nextNumber) > totalCars:
-            nextNumber = input("Car Number Not in Bounds, Enter Again (Type Results for Results): ")
+        if nextNumber == "" or not nextNumber.isdigit() or int(nextNumber) < 1 or int(nextNumber) > totalCars:
+            invalidNumber = True
+            while invalidNumber:
+                nextNumber = input("Car Number Not in Bounds, Enter Again (Type Results for Results): ")
+                if nextNumber == "Results":
+                    invalidNumber = False
+                    contToResults = True
+                    break
+                if nextNumber != "" and nextNumber.isdigit() and int(nextNumber) > 0 and int(nextNumber) <= totalCars:
+                    invalidNumber = False
+                    break
+            
         removeLastLine()
-        if nextNumber == "Results": # put this after the bounds check to avoid errors if the user types "Results" when prompted for a car number
-            break
         # code to increase vote number
-        carObj = carObjList[int(nextNumber) - 1]
-        carObj.votes += 1
+        if not contToResults:
+            carObj = carObjList[int(nextNumber) - 1]
+            carObj.votes += 1
+
 
     sortedCars = sortByMostVotes(carObjList)
     printResults(sortedCars)
