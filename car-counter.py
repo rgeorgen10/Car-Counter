@@ -27,7 +27,17 @@ def sortByMostVotes(carObjList):
         maxVotesRemainingIndex = 0
     return sortedObjList
 
-
+def printResults(sortedCars):
+    print("\n|----------------------------|")
+    print("|        Final Results       |")
+    print("|----------------------------|\n")
+    for i in range(len(sortedCars)):
+        if sortedCars[i].num >= 100:
+            print(f"Car Number: {sortedCars[i].num} | Votes: {sortedCars[i].votes}")
+        elif sortedCars[i].num >= 10:
+            print(f"Car Number: {sortedCars[i].num}  | Votes: {sortedCars[i].votes}")
+        else:
+            print(f"Car Number: {sortedCars[i].num}   | Votes: {sortedCars[i].votes}")
 
 def main():   # The Main Function: Where the program is mainly operated
     green()
@@ -49,7 +59,7 @@ def main():   # The Main Function: Where the program is mainly operated
             break
 
         # check Bounds of the number entered
-        while nextNumber == "Results" or int(nextNumber) < 1 or int(nextNumber) > totalCars:
+        while nextNumber == "" or int(nextNumber) < 1 or int(nextNumber) > totalCars:
             nextNumber = input("Car Number Not in Bounds, Enter Again (Type Results for Results): ")
         removeLastLine()
 
@@ -58,6 +68,7 @@ def main():   # The Main Function: Where the program is mainly operated
         carObj.votes += 1
 
     sortedCars = sortByMostVotes(carObjList)
+    printResults(sortedCars)
 
     white()
     exit(0)
