@@ -70,6 +70,7 @@ def main():   # The Main Function: Where the program is mainly operated
                 if nextNumber != "" and nextNumber.isdigit() and int(nextNumber) > 0 and int(nextNumber) <= totalCars:
                     invalidNumber = False
                     break
+                removeLastLine()
             
         removeLastLine()
         # code to increase vote number
