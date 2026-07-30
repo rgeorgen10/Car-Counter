@@ -20,8 +20,11 @@ def sortByMostVotes(carObjList):
         for k in range(len(carObjList)):
             if carObjList[k].votes > maxVotesRemaining:
                 maxVotesRemainingIndex = k
-        sortedObjList.append(carObjList[k])
-        carObjList.pop(k)
+                maxVotesRemaining = carObjList[k].votes
+        sortedObjList.append(carObjList[maxVotesRemainingIndex])
+        carObjList.pop(maxVotesRemainingIndex)
+        maxVotesRemaining = 0
+        maxVotesRemainingIndex = 0
     return sortedObjList
 
 
@@ -46,7 +49,7 @@ def main():   # The Main Function: Where the program is mainly operated
             break
 
         # check Bounds of the number entered
-        while int(nextNumber) < 1 or int(nextNumber) > totalCars:
+        while nextNumber == "Results" or int(nextNumber) < 1 or int(nextNumber) > totalCars:
             nextNumber = input("Car Number Not in Bounds, Enter Again (Type Results for Results): ")
         removeLastLine()
 
