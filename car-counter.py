@@ -93,14 +93,14 @@ def main():   # The Main Function: Where the program is mainly operated
 
 
     sortedCars = sortByMostVotes(carObjList)
-    takeTop = -1
-    while takeTop < 1 or takeTop > totalCars:
-        takeTop = int(input(f"How many of the top cars would you like to see? (1-{totalCars}): "))
-        if takeTop < 1 or takeTop > totalCars:
+    takeTop = input(f"How many of the top cars would you like to see? (1-{totalCars}): ")
+    while True:
+        if not takeTop.isdigit() or int(takeTop) < 1 or int(takeTop) > totalCars:
             removeLastLine()
-            print(f"Invalid Number, Please Enter a number between 1 and {totalCars}")
-            removeLastLine()
-    printResults(sortedCars, takeTop)
+            takeTop = input(f"Invalid Number, Please Enter a number between 1 and {totalCars}: ")
+        else:
+            break
+    printResults(sortedCars, int(takeTop))
 
     while True:
         export = input("Would you like to export the results to a text file? (Y/N): ")
