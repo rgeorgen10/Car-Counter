@@ -1,6 +1,6 @@
 # Car Counter
 
-`car-counter.py` is a script for counting cars in a video stream or sequence of images.
+`car-counter.py` is a script for counting cars
 
 ## Usage
 
