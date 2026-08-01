@@ -113,7 +113,6 @@ def main():   # The Main Function: Where the program is mainly operated
         else:
             removeLastLine()
             print("Invalid Input, Please Enter Y or N")
-            removeLastLine()
 
     white()
     exit(0)
